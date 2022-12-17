@@ -6,14 +6,16 @@ import {
   HasMany,
   Model,
   Table,
+  Unique,
+  Validate,
 } from "sequelize-typescript";
 import { Optional, UUIDV4 } from "sequelize";
 import Rental from "./rental";
 
 interface UserAttributes {
   id: string;
-  firstName: string;
-  lastName: string;
+  email: string;
+  password: string;
 }
 
 export interface UserCreationAttributes
@@ -33,12 +35,14 @@ class User
   id: string;
 
   @AllowNull(false)
+  @Validate({ isEmail: true })
+  @Unique(true)
   @Column
-  firstName: string;
+  email: string;
 
   @AllowNull(false)
   @Column
-  lastName: string;
+  password: string;
 
   @DeletedAt
   deletedAt?: Date;
