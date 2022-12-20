@@ -1,20 +1,20 @@
 import { Sequelize, SequelizeOptions } from "sequelize-typescript";
-import config from "config/config.json";
+import config from "config/config";
 import Author from "models/author";
 import Book from "models/book";
 import Rental from "models/rental";
 import User from "models/user";
 
-const local = config.local;
+const development = config.development;
 
 const sequelize = new Sequelize(
-  local.database,
-  local.username,
-  local.password,
+  development.database ?? "",
+  development.username ?? "",
+  development.password ?? "",
   {
-    host: local.host,
-    dialect: local.dialect as "mysql",
-    port: local.port,
+    host: development.host,
+    dialect: development.dialect,
+    port: development.port,
     models: [Book, Author, User, Rental],
   } as SequelizeOptions
 );
