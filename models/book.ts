@@ -17,6 +17,7 @@ export interface BookAttributes {
   id: string;
   name: string;
   price: number;
+  imageName?: string;
   authorId?: string;
   author?: AuthorCreationAttributes;
 }
@@ -44,6 +45,10 @@ class Book
   @AllowNull(false)
   @Column
   price: number;
+
+  @AllowNull(true)
+  @Column
+  imageName: string;
 
   @DeletedAt
   deletedAt?: Date;
